@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+
+# File that sometimes appears on MacOS
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Do not commit the distribution folder compiled by Webpack
+dist
+
+# ENV file with credentials
+.env

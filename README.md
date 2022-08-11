@@ -1,2 +1,3 @@
-# project4-foodapp
+# Project 4: Food App
+
 PTBC2 Project 4
