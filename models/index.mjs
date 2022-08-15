@@ -2,6 +2,13 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
+import categoryModel from './categoryModel.mjs';
+import itemModel from './item.mjs';
+import reviewModel from './review.mjs';
+import stallModel from './stall.mjs';
+import townModel from './town.mjs';
+import userModel from './user.mjs';
+
 const env = process.env.NODE_ENV || 'development';
 
 const config = allConfig[env];
@@ -29,6 +36,15 @@ if (env === 'production') {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+db.Category = categoryModel(sequelize, Sequelize.DataTypes);
+db.Item = itemModel(sequelize, Sequelize.DataTypes);
+db.Review = reviewModel(sequelize, Sequelize.DataTypes);
+db.Stall = stallModel(sequelize, Sequelize.DataTypes);
+db.Town = townModel(sequelize, Sequelize.DataTypes);
+db.User = userModel(sequelize, Sequelize.DataTypes);
+
+// establish model relationships (one to many etc)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
