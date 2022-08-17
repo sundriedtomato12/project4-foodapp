@@ -8,9 +8,6 @@ export default function App() {
       <Header title="Where To Eat?" />
       <Row title="Towns" />
       <Row title="Latest Reviews" />
-      <div className="reviews">
-        <p>Review components</p>
-      </div>
     </>
   );
 }
