@@ -9,6 +9,9 @@ export default function Row({ title }) {
   // will just need to input different data for the props
   const titleClassName = title.toLowerCase().replace(/\s+/g, "-");
   let rowComponents;
+  // need to create loops to render out the data for each respective row
+  // also need to put them in horizontal scrollable containers
+  //just rendering out a standard few boxes for now
   switch (title) {
     // Just rendering out 4 towns here first. when routes are done, will do loop to map and render
     case "Towns":
@@ -48,16 +51,6 @@ export default function Row({ title }) {
     <>
       <div className={titleClassName}>
         <h1 className={titleClassName}>{title}</h1>
-        <p>
-          To insert loop here to loop through data passed through. like data.map
-          to draw out relevant data to fill up the different props values. Will
-          also need if statements for different title values. Will have Towns,
-          Stalls, LatestReviews, Menu, and Reviews.
-        </p>
-        <p>
-          To create horizontally scrollable container to contain all the
-          rendered components.
-        </p>
         {rowComponents}
       </div>
     </>

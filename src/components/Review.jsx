@@ -5,7 +5,15 @@ export default function Review() {
   return (
     <Grid item xs={3}>
       <Paper className="Review">
-        <p>Stall Name\nTown\nRating\nReview</p>
+        <p>
+          Stall Name
+          <br />
+          Town
+          <br />
+          Rating
+          <br />
+          Review
+        </p>
       </Paper>
     </Grid>
   );
