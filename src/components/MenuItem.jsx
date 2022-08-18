@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 
-export default function Review() {
+export default function MenuItem() {
   return (
     <Grid item xs={3}>
-      <Paper className="Review">
+      <Paper className="menu-item">
         <p>
           Image
           <br />
