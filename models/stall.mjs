@@ -33,6 +33,9 @@ export default function stallModel(sequelize, DataTypes) {
         key: 'id',
       },
     },
+    photo: {
+      type: DataTypes.STRING,
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

@@ -46,6 +46,25 @@ db.User = userModel(sequelize, Sequelize.DataTypes);
 
 // establish model relationships (one to many etc)
 
+db.Stall.belongsTo(db.Category);
+db.Category.hasMany(db.Stall);
+
+db.Stall.belongsTo(db.Town);
+db.Town.hasMany(db.Stall);
+
+// should this be many to many
+db.Stall.belongsTo(db.User);
+db.User.hasMany(db.Stall);
+
+db.Review.belongsTo(db.User);
+db.User.hasMany(db.Review);
+
+db.Review.belongsTo(db.Stall);
+db.Stall.hasMany(db.Review);
+
+db.Item.belongsTo(db.Stall);
+db.Stall.hasMany(db.Item);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
