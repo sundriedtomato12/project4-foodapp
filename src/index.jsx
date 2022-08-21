@@ -1,11 +1,12 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles.scss';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.scss";
+import { BrowserRouter } from "react-router-dom";
 
-import App from './App.jsx';
+import App from "./App.jsx";
 
 // Create element for React to render into
-const rootElement = document.createElement('div');
+const rootElement = document.createElement("div");
 
 // Put that element on the page
 document.body.appendChild(rootElement);
@@ -14,4 +15,8 @@ document.body.appendChild(rootElement);
 const root = createRoot(rootElement);
 
 // Render React app in the React root element
-root.render(<App />);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
