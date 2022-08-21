@@ -14,6 +14,13 @@ export default function initDataController(db) {
       const latestReviews = await db.Review.findAll({
         limit: 5,
         order: [['createdAt', 'DESC']],
+        include: [
+          {
+            model: Stall,
+            required: true,
+            include: [{ model: Town, required: true }],
+          },
+        ],
       });
 
       response.send({ latestReviews });
@@ -42,6 +49,28 @@ export default function initDataController(db) {
       });
 
       response.send({ stallsInTown });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const listStallsWithAvgRating = async (request, response) => {
+    try {
+      const stallsWithAvgRating = await db.Review.findAll({
+        attributes: [[sequelize.fn('avg', sequelize.col('rating')), 'rating']],
+        include: [
+          {
+            model: Stall,
+          },
+        ],
+        where: {
+          townId: request.params.townId,
+        },
+        group: ['stall_id'],
+        raw: true,
+      });
+
+      response.send({ stallsWithAvgRating });
     } catch (error) {
       console.log(error);
     }
@@ -110,5 +139,6 @@ export default function initDataController(db) {
     listStallsCategoryFilter,
     listItemsByStall,
     listReviewsByStall,
+    listStallsWithAvgRating,
   };
 }
