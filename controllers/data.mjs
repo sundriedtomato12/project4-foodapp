@@ -125,6 +125,23 @@ export default function initDataController(db) {
 
   // post a review
 
+  const addReview = async (request, response) => {
+    console.log(request.body);
+    try {
+      const newReview = await db.Review.create({
+        user_id: request.cookies.userId,
+        stall_id: request.params.stallId,
+        rating: Number(request.body.rating),
+        comments: request.body.comments,
+      });
+      console.log(newReview);
+      res.send({ newReview });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
   // login, logout, signup
 
   // stall onboarding private form
@@ -140,5 +157,6 @@ export default function initDataController(db) {
     listItemsByStall,
     listReviewsByStall,
     listStallsWithAvgRating,
+    addReview,
   };
 }
