@@ -38,6 +38,9 @@ module.exports = {
       town_name: {
         type: Sequelize.STRING,
       },
+      photo: {
+        type: Sequelize.STRING,
+      },
     });
 
     await queryInterface.createTable('categories', {
@@ -85,6 +88,9 @@ module.exports = {
           model: 'categories',
           key: 'id',
         },
+      },
+      photo: {
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,

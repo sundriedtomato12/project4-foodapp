@@ -9,6 +9,9 @@ export default function townModel(sequelize, DataTypes) {
     townName: {
       type: DataTypes.STRING,
     },
+    photo: {
+      type: DataTypes.STRING,
+    },
 
   }, { underscored: true });
 }
