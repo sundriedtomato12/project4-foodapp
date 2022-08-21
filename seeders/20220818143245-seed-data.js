@@ -1,4 +1,4 @@
-const faker = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker');
 
 module.exports = {
   up: async (queryInterface) => {
@@ -10,44 +10,44 @@ module.exports = {
         email: faker.internet.email(),
         password: faker.internet.password(),
         name: faker.name.fullName(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       };
       usersList.push(fakeUser);
       i += 1;
     }
 
     const townsList = [{
-      townName: 'Ang Mo Kio',
+      town_name: 'Ang Mo Kio',
       photo: faker.image.city(),
     },
     {
-      townName: 'Tiong Bahru',
+      town_name: 'Tiong Bahru',
       photo: faker.image.city(),
     },
     {
-      townName: 'Orchard',
+      town_name: 'Orchard',
       photo: faker.image.city(),
     },
     {
-      townName: 'Jurong',
+      town_name: 'Jurong',
       photo: faker.image.city(),
     },
     {
-      townName: 'Tampines',
+      town_name: 'Tampines',
       photo: faker.image.city(),
     }];
 
     const categoriesList = [{
-      categoryName: 'Chinese',
+      category_name: 'Chinese',
     }, {
-      categoryName: 'Western',
+      category_name: 'Western',
     }, {
-      categoryName: 'Indian',
+      category_name: 'Indian',
     }, {
-      categoryName: 'Malay',
+      category_name: 'Malay',
     }, {
-      categoryName: 'Japanese',
+      category_name: 'Japanese',
     }];
 
     let j = 0;
@@ -57,12 +57,12 @@ module.exports = {
       fakeStall = {
         name: faker.company.name(),
         address: faker.internet.password(),
-        ownerId: 1,
-        townId: Math.ceil(Math.random() * 5),
-        categoryId: Math.ceil(Math.random() * 5),
+        owner_id: 1,
+        town_id: Math.ceil(Math.random() * 5),
+        category_id: Math.ceil(Math.random() * 5),
         photo: faker.image.business(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       };
       stallsList.push(fakeStall);
       j += 1;
@@ -76,9 +76,9 @@ module.exports = {
         name: faker.commerce.product(),
         description: faker.commerce.productDescription(),
         photo: faker.image.food(),
-        stallId: Math.ceil(Math.random() * 25),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        stall_id: Math.ceil(Math.random() * 25),
+        created_at: new Date(),
+        updated_at: new Date(),
       };
       itemsList.push(fakeItem);
       k += 1;
@@ -89,12 +89,12 @@ module.exports = {
     const reviewsList = [];
     while (l < 100) {
       fakeReview = {
-        userId: 1,
-        stallId: Math.ceil(Math.random() * 25),
+        user_id: 1,
+        stall_id: Math.ceil(Math.random() * 25),
         comments: `This stall is ${faker.word.adjective()}! I have eaten here ${faker.word.adverb()}`,
         rating: Math.ceil(Math.random() * 5),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       };
       reviewsList.push(fakeReview);
       l += 1;
