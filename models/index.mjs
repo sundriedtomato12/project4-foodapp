@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
-import categoryModel from './categoryModel.mjs';
+import categoryModel from './category.mjs';
 import itemModel from './item.mjs';
 import reviewModel from './review.mjs';
 import stallModel from './stall.mjs';

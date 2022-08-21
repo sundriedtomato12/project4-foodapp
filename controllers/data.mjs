@@ -32,6 +32,7 @@ export default function initDataController(db) {
   const listCategories = async (request, response) => {
     try {
       const categories = await db.Category.findAll();
+      console.log(categories);
       response.send({ categories });
     } catch (error) {
       console.log(error);
