@@ -6,7 +6,7 @@ export default function townModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    townName: {
+    town_name: {
       type: DataTypes.STRING,
     },
     photo: {

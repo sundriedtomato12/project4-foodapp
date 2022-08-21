@@ -178,11 +178,11 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
-    await queryInterface.dropTable('stalls');
     await queryInterface.dropTable('reviews');
     await queryInterface.dropTable('items');
+    await queryInterface.dropTable('stalls');
     await queryInterface.dropTable('towns');
     await queryInterface.dropTable('categories');
+    await queryInterface.dropTable('users');
   },
 };

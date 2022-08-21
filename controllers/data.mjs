@@ -2,7 +2,7 @@ export default function initDataController(db) {
   const listTowns = async (request, response) => {
     try {
       const towns = await db.Town.findAll();
-      response.send({ towns });
+      response.json({ towns });
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +44,7 @@ export default function initDataController(db) {
     try {
       const stallsInTown = await db.Stall.findAll({
         where: {
-          townId: request.params.townId,
+          town_id: request.params.town_id,
         },
       });
 
@@ -64,9 +64,9 @@ export default function initDataController(db) {
           },
         ],
         where: {
-          townId: request.params.townId,
+          town_id: request.params.town_id,
         },
-        group: ['stall_id'],
+        group: ['stallId'],
         raw: true,
       });
 
@@ -82,8 +82,8 @@ export default function initDataController(db) {
     try {
       const stallsCatFiltered = await db.Stall.findAll({
         where: {
-          townId: request.params.townId,
-          categoryId: request.body.categoryId,
+          town_id: request.params.town_id,
+          category_id: request.body.category_id,
         },
       });
 
@@ -98,7 +98,7 @@ export default function initDataController(db) {
     try {
       const itemsInStall = await db.Item.findAll({
         where: {
-          stallId: request.params.stallId,
+          stall_id: request.params.stall_id,
         },
       });
 
@@ -113,7 +113,7 @@ export default function initDataController(db) {
     try {
       const reviewsOnStall = await db.Review.findAll({
         where: {
-          stallId: request.params.stallId,
+          stall_id: request.params.stall_id,
         },
       });
 
@@ -129,13 +129,13 @@ export default function initDataController(db) {
     console.log(request.body);
     try {
       const newReview = await db.Review.create({
-        user_id: request.cookies.userId,
-        stall_id: request.params.stallId,
+        user_id: request.cookies.user_id,
+        stall_id: request.params.stall_id,
         rating: Number(request.body.rating),
         comments: request.body.comments,
       });
       console.log(newReview);
-      res.send({ newReview });
+      response.send({ newReview });
     }
     catch (error) {
       console.log(error);

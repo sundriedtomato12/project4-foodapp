@@ -9,9 +9,14 @@ export default function Header({ title }) {
         <Grid item xs={8}>
           <h1 className="header">{title}</h1>
         </Grid>
-        <Grid item xs={4}>
-          <Button variant="contained" className="login-or-signup">
-            Login or Sign Up!
+        <Grid item xs={2}>
+          <Button variant="contained" className="login" href="/login">
+            Login
+          </Button>
+        </Grid>
+        <Grid item xs={2}>
+          <Button variant="contained" className="signup" href="/signup">
+            Sign Up
           </Button>
         </Grid>
       </Grid>

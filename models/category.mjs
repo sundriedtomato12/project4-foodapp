@@ -6,7 +6,7 @@ export default function categoryModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    categoryName: {
+    category_name: {
       type: DataTypes.STRING,
     },
 
