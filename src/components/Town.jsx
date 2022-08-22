@@ -2,18 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Grid, Box } from "@mui/material";
 import axios from "axios";
 
-export default function Town() {
-  useEffect(() => {
-    axios.get("/towns").then((response) => {
-      console.log(response);
-    });
-  });
-
+export default function Town({ townName, townPhoto }) {
   return (
-    <Grid item xs={3}>
+    <Grid item xs={2}>
       <Box className="town">
-        <p>Name</p>
-        <p>Image as background</p>
+        <p>{townName}</p>
+        <img src={townPhoto}></img>
       </Box>
     </Grid>
   );

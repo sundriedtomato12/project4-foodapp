@@ -41,6 +41,14 @@ module.exports = {
       photo: {
         type: Sequelize.STRING,
       },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
 
     await queryInterface.createTable('categories', {
@@ -52,6 +60,14 @@ module.exports = {
       },
       category_name: {
         type: Sequelize.STRING,
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
 

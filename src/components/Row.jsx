@@ -1,9 +1,17 @@
-import React, { useState } from "react";
-import Town from "./Town.jsx";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Town from "./Town.jsx";
 import Review from "./Review.jsx";
 
 export default function Row({ title }) {
+  const [towns, setTowns] = useState([]);
+  // usestate to setTowns
+  useEffect(() => {
+    axios.get("/api/towns").then((response) => {
+      setTowns(response.data.towns);
+    });
+  });
   // creating this general row component so that we can reuse it for:
   // row of towns, row of latest stall reviews, row of menu items, and row of reviews
   // will just need to input different data for the props
@@ -11,16 +19,13 @@ export default function Row({ title }) {
   let rowComponents;
   // need to create loops to render out the data for each respective row
   // also need to put them in horizontal scrollable containers
-  //just rendering out a standard few boxes for now
   switch (title) {
-    // Just rendering out 4 towns here first. when routes are done, will do loop to map and render
     case "Towns":
       rowComponents = (
         <Grid container spacing={2}>
-          <Town />
-          <Town />
-          <Town />
-          <Town />
+          {towns.map((town) => (
+            <Town townName={town.town_name} townPhoto={town.photo} />
+          ))}
         </Grid>
       );
       break;

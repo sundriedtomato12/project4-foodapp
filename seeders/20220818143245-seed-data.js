@@ -1,5 +1,8 @@
 const { faker } = require('@faker-js/faker');
 
+// BEFORE SEEDING, ADD 1 ENTRY INTO THE DATABASE AS USER ID: 1
+// MAKE SURE ALL TABLES ARE EMPTY AND IDs ARE STARTING FROM 1
+
 module.exports = {
   up: async (queryInterface) => {
     let i = 0;
@@ -19,35 +22,55 @@ module.exports = {
 
     const townsList = [{
       town_name: 'Ang Mo Kio',
-      photo: faker.image.city(),
+      photo: faker.image.city(200, 200, true),
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       town_name: 'Tiong Bahru',
-      photo: faker.image.city(),
+      photo: faker.image.city(200, 200, true),
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       town_name: 'Orchard',
-      photo: faker.image.city(),
+      photo: faker.image.city(200, 200, true),
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       town_name: 'Jurong',
-      photo: faker.image.city(),
+      photo: faker.image.city(200, 200, true),
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       town_name: 'Tampines',
-      photo: faker.image.city(),
+      photo: faker.image.city(200, 200, true),
+      created_at: new Date(),
+      updated_at: new Date(),
     }];
 
     const categoriesList = [{
       category_name: 'Chinese',
+      created_at: new Date(),
+      updated_at: new Date(),
     }, {
       category_name: 'Western',
+      created_at: new Date(),
+      updated_at: new Date(),
     }, {
       category_name: 'Indian',
+      created_at: new Date(),
+      updated_at: new Date(),
     }, {
       category_name: 'Malay',
+      created_at: new Date(),
+      updated_at: new Date(),
     }, {
       category_name: 'Japanese',
+      created_at: new Date(),
+      updated_at: new Date(),
     }];
 
     let j = 0;
@@ -60,7 +83,7 @@ module.exports = {
         owner_id: 1,
         town_id: Math.ceil(Math.random() * 5),
         category_id: Math.ceil(Math.random() * 5),
-        photo: faker.image.business(),
+        photo: faker.image.business(200, 200, true),
         created_at: new Date(),
         updated_at: new Date(),
       };
@@ -75,7 +98,7 @@ module.exports = {
       fakeItem = {
         name: faker.commerce.product(),
         description: faker.commerce.productDescription(),
-        photo: faker.image.food(),
+        photo: faker.image.food(200, 200, true),
         stall_id: Math.ceil(Math.random() * 25),
         created_at: new Date(),
         updated_at: new Date(),
