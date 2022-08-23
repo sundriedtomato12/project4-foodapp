@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { faker } = require('@faker-js/faker');
 
 // BEFORE SEEDING, ADD 1 ENTRY INTO THE DATABASE AS USER ID: 1
@@ -80,7 +81,7 @@ module.exports = {
       fakeStall = {
         name: faker.company.name(),
         address: faker.internet.password(),
-        owner_id: 1,
+        user_id: 1,
         town_id: Math.ceil(Math.random() * 5),
         category_id: Math.ceil(Math.random() * 5),
         photo: faker.image.business(200, 200, true),

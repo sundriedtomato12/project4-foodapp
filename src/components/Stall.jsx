@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 
-export default function Stall() {
+export default function Stall({ stall }) {
   return (
     <Grid item xs={3}>
       <Paper className="stall">
-        <p>
-          Stall Name
-          <br />
-          AverageRating
-          <br />
-          Review
-        </p>
+        <p>{stall.name}</p>
+        <p>{stall.address}</p>
       </Paper>
     </Grid>
   );

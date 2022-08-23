@@ -8,12 +8,17 @@ export default function routes(app) {
   app.get('/api/towns', DataController.listTowns);
   app.get('/api/latest-reviews', DataController.listlatestReviews);
   app.get('/api/categories', DataController.listCategories);
-  app.get('/api/stalls/:townId', DataController.listStallsByTown);
-  app.get('/api/rated-stalls/:townId', DataController.listStallsWithAvgRating);
-  app.get('/api/category-stalls/:townId', DataController.listStallsCategoryFilter);
-  app.get('/api/stall-items/:stallId', DataController.listItemsByStall);
-  app.get('/api/stall-reviews/:stallId', DataController.listReviewsByStall);
-  app.post('/api/new-review/:stallId', DataController.addReview);
+  // this route works, but can't figure out how to get it to work in react router :(
+  // I keep getting this unsaught syntax error unexpected token: '<'
+  app.get('/api/town/:town_id', DataController.listStallsByTown);
+  // this route doesn't work
+  app.get('/api/town/:town_id/avg-rating', DataController.listStallsWithAvgRating);
+  // test again when we setup the page with category dropdown
+  app.get('/api/town/:town_id/category-stalls', DataController.listStallsCategoryFilter);
+  app.get('/api/stall/:stall_id/items', DataController.listItemsByStall);
+  app.get('/api/stall/:stall_id/reviews', DataController.listReviewsByStall);
+  // post not tested
+  app.post('/api/stall/:stall_id/new-review', DataController.addReview);
 
   app.get('*', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));

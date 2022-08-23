@@ -84,7 +84,7 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
       },
-      owner_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',

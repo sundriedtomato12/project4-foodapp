@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 
-export default function Review() {
+export default function Review({ review }) {
   return (
     <Grid item xs={3}>
-      <Paper className="Review">
+      <Paper className="Review" key={review.id}>
         <p>
-          Stall Name
+          {review.stall.name}
           <br />
-          Town
+          {review.stall.town.town_name}
           <br />
-          Rating
+          {review.rating}
           <br />
-          Review
+          {review.comments}
         </p>
       </Paper>
     </Grid>

@@ -12,7 +12,7 @@ export default function stallModel(sequelize, DataTypes) {
     address: {
       type: DataTypes.STRING,
     },
-    owner_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'users',

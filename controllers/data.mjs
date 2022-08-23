@@ -1,3 +1,5 @@
+import { Sequelize } from 'sequelize';
+
 export default function initDataController(db) {
   const listTowns = async (request, response) => {
     try {
@@ -9,21 +11,22 @@ export default function initDataController(db) {
   };
 
   // need some inner join to get stall id/name,town
+  // this one doesn't work :(
   const listlatestReviews = async (request, response) => {
     try {
       const latestReviews = await db.Review.findAll({
         limit: 5,
-        order: [['createdAt', 'DESC']],
+        order: [['created_at', 'DESC']],
         include: [
           {
-            model: Stall,
+            model: db.Stall,
             required: true,
-            include: [{ model: Town, required: true }],
+            include: [{ model: db.Town, required: true }],
           },
         ],
       });
 
-      response.send({ latestReviews });
+      response.json({ latestReviews });
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +35,7 @@ export default function initDataController(db) {
   const listCategories = async (request, response) => {
     try {
       const categories = await db.Category.findAll();
-      response.send({ categories });
+      response.json({ categories });
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +51,7 @@ export default function initDataController(db) {
         },
       });
 
-      response.send({ stallsInTown });
+      response.json({ stallsInTown });
     } catch (error) {
       console.log(error);
     }
@@ -57,20 +60,20 @@ export default function initDataController(db) {
   const listStallsWithAvgRating = async (request, response) => {
     try {
       const stallsWithAvgRating = await db.Review.findAll({
-        attributes: [[sequelize.fn('avg', sequelize.col('rating')), 'rating']],
+        attributes: [[Sequelize.fn('avg', Sequelize.col('rating')), 'rating']],
         include: [
           {
-            model: Stall,
+            model: db.Stall,
+            where: {
+              town_id: request.params.town_id,
+            },
           },
         ],
-        where: {
-          town_id: request.params.town_id,
-        },
-        group: ['stallId'],
+        group: ['stall_id'],
         raw: true,
       });
 
-      response.send({ stallsWithAvgRating });
+      response.json({ stallsWithAvgRating });
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +90,7 @@ export default function initDataController(db) {
         },
       });
 
-      response.send({ stallsCatFiltered });
+      response.json({ stallsCatFiltered });
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +105,7 @@ export default function initDataController(db) {
         },
       });
 
-      response.send({ itemsInStall });
+      response.json({ itemsInStall });
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +120,7 @@ export default function initDataController(db) {
         },
       });
 
-      response.send({ reviewsOnStall });
+      response.json({ reviewsOnStall });
     } catch (error) {
       console.log(error);
     }
