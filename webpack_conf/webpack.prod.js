@@ -32,4 +32,7 @@ module.exports = merge(common, {
       },
     ],
   },
+  output: {
+    publicPath: '/', // if you don't put the "/" here, you get this error:
+  }, // "bundle.js:1 Uncaught SyntaxError: Unexpected token <"
 });
