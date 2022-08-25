@@ -6,19 +6,20 @@ import Header from "../components/Header.jsx";
 import Row from "../components/Row.jsx";
 
 export default function TownPage() {
-  let { townId } = useParams();
+  let { town_id } = useParams();
   const [stallsInTown, setStallsInTown] = useState([]);
-  console.log(townId);
+  const [townName, setTownName] = useState("");
 
   useEffect(() => {
-    axios.get(`/api/town/${townId}`).then((response) => {
+    axios.get(`/api/town/${town_id}`).then((response) => {
       setStallsInTown(response.data.stallsInTown);
+      setTownName(response.data.stallsInTown[0].town.town_name);
     });
   }, []);
 
   return (
     <>
-      <Header title="Town Name" />
+      <Header title={townName} />
       <Row title="Stalls" stallsInTown={stallsInTown} />
     </>
   );

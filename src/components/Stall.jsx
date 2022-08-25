@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 
 export default function Stall({ stall }) {
+  console.log(stall);
   return (
     <Grid item xs={3}>
       <Paper className="stall">

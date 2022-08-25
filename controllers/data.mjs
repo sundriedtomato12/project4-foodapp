@@ -49,6 +49,14 @@ export default function initDataController(db) {
         where: {
           town_id: request.params.town_id,
         },
+        include: [
+          {
+            model: db.Town,
+            where: {
+              id: request.params.town_id,
+            },
+          },
+        ],
       });
 
       response.json({ stallsInTown });

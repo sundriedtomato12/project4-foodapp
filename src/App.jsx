@@ -24,7 +24,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/signup" element={signupComponents} />
-      <Route path="/town/:townId" element={<TownPage />} />
+      <Route path="/town/:town_id" element={<TownPage />} />
     </Routes>
   );
 }

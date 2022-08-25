@@ -8,8 +8,6 @@ export default function routes(app) {
   app.get('/api/towns', DataController.listTowns);
   app.get('/api/latest-reviews', DataController.listlatestReviews);
   app.get('/api/categories', DataController.listCategories);
-  // this route works, but can't figure out how to get it to work in react router :(
-  // I keep getting this uncaught syntax error unexpected token: '<'
   app.get('/api/town/:town_id', DataController.listStallsByTown);
   // this route doesn't work
   app.get('/api/town/:town_id/avg-rating', DataController.listStallsWithAvgRating);
