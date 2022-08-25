@@ -6,10 +6,9 @@ import Town from "./Town.jsx";
 import Review from "./Review.jsx";
 import Stall from "./Stall.jsx";
 
-export default function Row({ title, stallsByTown, setStallsByTown }) {
+export default function Row({ title, stallsInTown }) {
   // usestate to setTowns
   // should do the same thing for the other stuff
-  const town_id = useParams();
   const [towns, setTowns] = useState([]);
   const [latestReviews, setLatestReviews] = useState([]);
   useEffect(() => {
@@ -22,11 +21,7 @@ export default function Row({ title, stallsByTown, setStallsByTown }) {
       setLatestReviews(response.data.latestReviews);
     });
   }, []);
-  useEffect(() => {
-    axios.get(`/api/town/${town_id}`).then((response) => {
-      setStallsByTown(response.data.stallsInTown);
-    });
-  }, []);
+
   // creating this general row component so that we can reuse it for:
   // so far only rows of towns and latest reviews work.
   // but because stalls need dynamic route, am gonna create a component on its own.
@@ -57,7 +52,7 @@ export default function Row({ title, stallsByTown, setStallsByTown }) {
       // stalls in town
       rowComponents = (
         <Grid container spacing={2}>
-          {stallsByTown.map((stall) => (
+          {stallsInTown.map((stall) => (
             <Stall stall={stall} />
           ))}
         </Grid>
