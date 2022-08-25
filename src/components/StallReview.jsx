@@ -6,7 +6,7 @@ export default function StallReview({ review }) {
     <Grid item xs={3}>
       <Paper className="Review" key={review.id}>
         <p>
-          {review.user_id}
+          {review.user.name}
           <br />
           {review.rating}
           <br />

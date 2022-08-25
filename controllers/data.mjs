@@ -134,6 +134,11 @@ export default function initDataController(db) {
         where: {
           stall_id: request.params.stall_id,
         },
+        include: [
+          {
+            model: db.User,
+          },
+        ],
       });
 
       response.json({ reviewsOnStall });
