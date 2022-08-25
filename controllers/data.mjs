@@ -111,6 +111,14 @@ export default function initDataController(db) {
         where: {
           stall_id: request.params.stall_id,
         },
+        include: [
+          {
+            model: db.Stall,
+            where: {
+              id: request.params.stall_id,
+            },
+          },
+        ],
       });
 
       response.json({ itemsInStall });

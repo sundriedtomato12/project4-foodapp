@@ -19,7 +19,8 @@ export default function TownPage() {
 
   return (
     <>
-      <Header title={townName} />
+      <Header />
+      <h1>{townName}</h1>
       <Row title="Stalls" stallsInTown={stallsInTown} />
     </>
   );

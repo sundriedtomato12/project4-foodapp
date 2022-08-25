@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Town from "./Town.jsx";
-import Review from "./Review.jsx";
+import LatestReview from "./LatestReview.jsx";
+import StallReview from "./StallReview.jsx";
 import Stall from "./Stall.jsx";
+import MenuItem from "./MenuItem.jsx";
 
-export default function Row({ title, stallsInTown }) {
+export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
   // usestate to setTowns
   // should do the same thing for the other stuff
   const [towns, setTowns] = useState([]);
@@ -43,7 +45,7 @@ export default function Row({ title, stallsInTown }) {
       rowComponents = (
         <Grid container spacing={2}>
           {latestReviews.map((review) => (
-            <Review review={review} />
+            <LatestReview review={review} />
           ))}
         </Grid>
       );
@@ -59,10 +61,22 @@ export default function Row({ title, stallsInTown }) {
       );
       break;
     case "Menu":
-      rowComponents = <p>Menu!!</p>;
+      rowComponents = (
+        <Grid container spacing={2}>
+          {menuItems.map((item) => (
+            <MenuItem item={item} />
+          ))}
+        </Grid>
+      );
       break;
     case "Reviews":
-      rowComponents = <p>Reviews!!</p>;
+      rowComponents = (
+        <Grid container spacing={2}>
+          {stallReviews.map((review) => (
+            <StallReview review={review} />
+          ))}
+        </Grid>
+      );
       break;
     default:
       rowComponents;

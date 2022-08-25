@@ -6,14 +6,9 @@ import LoginForm from "./components/LoginForm.jsx";
 import SignUpForm from "./components/SignUpForm.jsx";
 import MainPage from "./pages/MainPage.jsx";
 import TownPage from "./pages/TownPage.jsx";
+import StallPage from "./pages/StallPage.jsx";
 
 export default function App() {
-  const loginComponents = (
-    <>
-      <LoginForm />
-    </>
-  );
-
   const signupComponents = (
     <>
       <SignUpForm />
@@ -25,6 +20,7 @@ export default function App() {
       <Route path="/" element={<MainPage />} />
       <Route path="/signup" element={signupComponents} />
       <Route path="/town/:town_id" element={<TownPage />} />
+      <Route path="/stall/:stall_id" element={<StallPage />} />
     </Routes>
   );
 }
