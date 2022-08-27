@@ -6,17 +6,17 @@ export default function townModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    townName: {
+    town_name: {
       type: DataTypes.STRING,
     },
     photo: {
       type: DataTypes.STRING,
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
-    updatedAt: {
+    updated_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },

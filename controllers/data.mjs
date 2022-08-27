@@ -1,29 +1,32 @@
+import { Sequelize } from 'sequelize';
+
 export default function initDataController(db) {
   const listTowns = async (request, response) => {
     try {
       const towns = await db.Town.findAll();
-      response.send({ towns });
+      response.json({ towns });
     } catch (error) {
       console.log(error);
     }
   };
 
   // need some inner join to get stall id/name,town
+  // this one doesn't work :(
   const listlatestReviews = async (request, response) => {
     try {
       const latestReviews = await db.Review.findAll({
         limit: 5,
-        order: [['createdAt', 'DESC']],
+        order: [['created_at', 'DESC']],
         include: [
           {
-            model: Stall,
+            model: db.Stall,
             required: true,
-            include: [{ model: Town, required: true }],
+            include: [{ model: db.Town, required: true }],
           },
         ],
       });
 
-      response.send({ latestReviews });
+      response.json({ latestReviews });
     } catch (error) {
       console.log(error);
     }
@@ -32,8 +35,7 @@ export default function initDataController(db) {
   const listCategories = async (request, response) => {
     try {
       const categories = await db.Category.findAll();
-      console.log(categories);
-      response.send({ categories });
+      response.json({ categories });
     } catch (error) {
       console.log(error);
     }
@@ -45,11 +47,19 @@ export default function initDataController(db) {
     try {
       const stallsInTown = await db.Stall.findAll({
         where: {
-          townId: request.params.townId,
+          town_id: request.params.town_id,
         },
+        include: [
+          {
+            model: db.Town,
+            where: {
+              id: request.params.town_id,
+            },
+          },
+        ],
       });
 
-      response.send({ stallsInTown });
+      response.json({ stallsInTown });
     } catch (error) {
       console.log(error);
     }
@@ -58,20 +68,20 @@ export default function initDataController(db) {
   const listStallsWithAvgRating = async (request, response) => {
     try {
       const stallsWithAvgRating = await db.Review.findAll({
-        attributes: [[sequelize.fn('avg', sequelize.col('rating')), 'rating']],
+        attributes: [[Sequelize.fn('avg', Sequelize.col('rating')), 'rating']],
         include: [
           {
-            model: Stall,
+            model: db.Stall,
+            where: {
+              town_id: request.params.town_id,
+            },
           },
         ],
-        where: {
-          townId: request.params.townId,
-        },
         group: ['stall_id'],
         raw: true,
       });
 
-      response.send({ stallsWithAvgRating });
+      response.json({ stallsWithAvgRating });
     } catch (error) {
       console.log(error);
     }
@@ -83,12 +93,12 @@ export default function initDataController(db) {
     try {
       const stallsCatFiltered = await db.Stall.findAll({
         where: {
-          townId: request.params.townId,
-          categoryId: request.body.categoryId,
+          town_id: request.params.town_id,
+          category_id: request.body.category_id,
         },
       });
 
-      response.send({ stallsCatFiltered });
+      response.json({ stallsCatFiltered });
     } catch (error) {
       console.log(error);
     }
@@ -99,11 +109,19 @@ export default function initDataController(db) {
     try {
       const itemsInStall = await db.Item.findAll({
         where: {
-          stallId: request.params.stallId,
+          stall_id: request.params.stall_id,
         },
+        include: [
+          {
+            model: db.Stall,
+            where: {
+              id: request.params.stall_id,
+            },
+          },
+        ],
       });
 
-      response.send({ itemsInStall });
+      response.json({ itemsInStall });
     } catch (error) {
       console.log(error);
     }
@@ -114,11 +132,16 @@ export default function initDataController(db) {
     try {
       const reviewsOnStall = await db.Review.findAll({
         where: {
-          stallId: request.params.stallId,
+          stall_id: request.params.stall_id,
         },
+        include: [
+          {
+            model: db.User,
+          },
+        ],
       });
 
-      response.send({ reviewsOnStall });
+      response.json({ reviewsOnStall });
     } catch (error) {
       console.log(error);
     }
@@ -130,13 +153,13 @@ export default function initDataController(db) {
     console.log(request.body);
     try {
       const newReview = await db.Review.create({
-        user_id: request.cookies.userId,
-        stall_id: request.params.stallId,
+        user_id: request.cookies.user_id,
+        stall_id: request.params.stall_id,
         rating: Number(request.body.rating),
         comments: request.body.comments,
       });
       console.log(newReview);
-      res.send({ newReview });
+      response.send({ newReview });
     }
     catch (error) {
       console.log(error);

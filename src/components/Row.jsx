@@ -1,47 +1,82 @@
-import React, { useState } from "react";
-import Town from "./Town.jsx";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Grid from "@mui/material/Grid";
-import Review from "./Review.jsx";
+import Town from "./Town.jsx";
+import LatestReview from "./LatestReview.jsx";
+import StallReview from "./StallReview.jsx";
+import Stall from "./Stall.jsx";
+import MenuItem from "./MenuItem.jsx";
 
-export default function Row({ title }) {
+export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
+  // usestate to setTowns
+  // should do the same thing for the other stuff
+  const [towns, setTowns] = useState([]);
+  const [latestReviews, setLatestReviews] = useState([]);
+  useEffect(() => {
+    axios.get("/api/towns").then((response) => {
+      setTowns(response.data.towns);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("/api/latest-reviews").then((response) => {
+      setLatestReviews(response.data.latestReviews);
+    });
+  }, []);
+
   // creating this general row component so that we can reuse it for:
-  // row of towns, row of latest stall reviews, row of menu items, and row of reviews
-  // will just need to input different data for the props
+  // so far only rows of towns and latest reviews work.
+  // but because stalls need dynamic route, am gonna create a component on its own.
   const titleClassName = title.toLowerCase().replace(/\s+/g, "-");
   let rowComponents;
   // need to create loops to render out the data for each respective row
   // also need to put them in horizontal scrollable containers
-  //just rendering out a standard few boxes for now
   switch (title) {
-    // Just rendering out 4 towns here first. when routes are done, will do loop to map and render
     case "Towns":
       rowComponents = (
         <Grid container spacing={2}>
-          <Town />
-          <Town />
-          <Town />
-          <Town />
+          {towns.map((town) => (
+            <Town town={town} />
+          ))}
         </Grid>
       );
       break;
     case "Latest Reviews":
       rowComponents = (
         <Grid container spacing={2}>
-          <Review />
-          <Review />
-          <Review />
-          <Review />
+          {latestReviews.map((review) => (
+            <LatestReview review={review} />
+          ))}
         </Grid>
       );
       break;
     case "Stalls":
-      rowComponents = <p>Stalls!!</p>;
+      // stalls in town
+      rowComponents = (
+        <Grid container spacing={2}>
+          {stallsInTown.map((stall) => (
+            <Stall stall={stall} />
+          ))}
+        </Grid>
+      );
       break;
     case "Menu":
-      rowComponents = <p>Menu!!</p>;
+      rowComponents = (
+        <Grid container spacing={2}>
+          {menuItems.map((item) => (
+            <MenuItem item={item} />
+          ))}
+        </Grid>
+      );
       break;
     case "Reviews":
-      rowComponents = <p>Reviews!!</p>;
+      rowComponents = (
+        <Grid container spacing={2}>
+          {stallReviews.map((review) => (
+            <StallReview review={review} />
+          ))}
+        </Grid>
+      );
       break;
     default:
       rowComponents;

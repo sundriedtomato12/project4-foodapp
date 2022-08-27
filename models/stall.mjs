@@ -12,21 +12,21 @@ export default function stallModel(sequelize, DataTypes) {
     address: {
       type: DataTypes.STRING,
     },
-    ownerId: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'users',
         key: 'id',
       },
     },
-    townId: {
+    town_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'towns',
         key: 'id',
       },
     },
-    categoryId: {
+    category_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'categories',
@@ -36,11 +36,11 @@ export default function stallModel(sequelize, DataTypes) {
     photo: {
       type: DataTypes.STRING,
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
-    updatedAt: {
+    updated_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },

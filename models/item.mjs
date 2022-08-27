@@ -19,18 +19,18 @@ export default function itemModel(sequelize, DataTypes) {
       type: DataTypes.STRING,
     },
 
-    stallId: {
+    stall_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'stalls',
         key: 'id',
       },
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
-    updatedAt: {
+    updated_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },

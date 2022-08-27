@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 
-export default function MenuItem({ item }) {
+export default function StallReview({ review }) {
   return (
     <Grid item xs={3}>
-      <Paper className="menu-item">
+      <Paper className="Review" key={review.id}>
         <p>
-          <img src={item.photo} />
+          {review.user.name}
           <br />
-          {item.name}
+          {review.rating}
           <br />
-          {item.description}
+          {review.comments}
         </p>
       </Paper>
     </Grid>

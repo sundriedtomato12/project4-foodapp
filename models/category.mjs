@@ -6,14 +6,14 @@ export default function categoryModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    categoryName: {
+    category_name: {
       type: DataTypes.STRING,
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
-    updatedAt: {
+    updated_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },

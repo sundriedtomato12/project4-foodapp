@@ -6,14 +6,14 @@ export default function reviewModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'users',
         key: 'id',
       },
     },
-    stallId: {
+    stall_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'stalls',
@@ -26,11 +26,11 @@ export default function reviewModel(sequelize, DataTypes) {
     rating: {
       type: DataTypes.DECIMAL(10, 2),
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
-    updatedAt: {
+    updated_at: {
       allowNull: false,
       type: DataTypes.DATE,
     },
