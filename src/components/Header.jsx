@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export default function Header({ user }) {
   const navigate = useNavigate();
@@ -51,7 +52,9 @@ export default function Header({ user }) {
     <>
       <Grid container spacing={2} className="header">
         <Grid item xs={8}>
-          <h1 className="header">Where To Eat?</h1>
+          <h1 className="header">
+            <a href="/">Where To Eat?</a>
+          </h1>
         </Grid>
         {buttons}
       </Grid>
