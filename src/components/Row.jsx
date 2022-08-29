@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import Grid from "@mui/material/Grid";
-import Town from "./Town.jsx";
-import LatestReview from "./LatestReview.jsx";
-import StallReview from "./StallReview.jsx";
-import Stall from "./Stall.jsx";
-import MenuItem from "./MenuItem.jsx";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Grid from '@mui/material/Grid';
+import Town from './Town.jsx';
+import LatestReview from './LatestReview.jsx';
+import StallReview from './StallReview.jsx';
+import Stall from './Stall.jsx';
+import MenuItem from './MenuItem.jsx';
 
-export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
+export default function Row({
+  title, stallsInTown, menuItems, stallReviews,
+}) {
   // usestate to setTowns
   // should do the same thing for the other stuff
   const [towns, setTowns] = useState([]);
   const [latestReviews, setLatestReviews] = useState([]);
   useEffect(() => {
-    axios.get("/api/towns").then((response) => {
+    axios.get('/api/towns').then((response) => {
       setTowns(response.data.towns);
     });
   }, []);
   useEffect(() => {
-    axios.get("/api/latest-reviews").then((response) => {
+    axios.get('/api/latest-reviews').then((response) => {
       setLatestReviews(response.data.latestReviews);
     });
   }, []);
@@ -27,12 +29,12 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
   // creating this general row component so that we can reuse it for:
   // so far only rows of towns and latest reviews work.
   // but because stalls need dynamic route, am gonna create a component on its own.
-  const titleClassName = title.toLowerCase().replace(/\s+/g, "-");
+  const titleClassName = title.toLowerCase().replace(/\s+/g, '-');
   let rowComponents;
   // need to create loops to render out the data for each respective row
   // also need to put them in horizontal scrollable containers
   switch (title) {
-    case "Towns":
+    case 'Towns':
       rowComponents = (
         <Grid container spacing={2}>
           {towns.map((town) => (
@@ -41,7 +43,7 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
         </Grid>
       );
       break;
-    case "Latest Reviews":
+    case 'Latest Reviews':
       rowComponents = (
         <Grid container spacing={2}>
           {latestReviews.map((review) => (
@@ -50,7 +52,7 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
         </Grid>
       );
       break;
-    case "Stalls":
+    case 'Stalls':
       // stalls in town
       rowComponents = (
         <Grid container spacing={2}>
@@ -60,7 +62,7 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
         </Grid>
       );
       break;
-    case "Menu":
+    case 'Menu':
       rowComponents = (
         <Grid container spacing={2}>
           {menuItems.map((item) => (
@@ -69,7 +71,7 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
         </Grid>
       );
       break;
-    case "Reviews":
+    case 'Reviews':
       rowComponents = (
         <Grid container spacing={2}>
           {stallReviews.map((review) => (

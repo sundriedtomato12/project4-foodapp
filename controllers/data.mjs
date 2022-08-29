@@ -65,6 +65,27 @@ export default function initDataController(db) {
     }
   };
 
+  const listStallsByMerchant = async (request, response) => {
+    try {
+      const stallsByMerchant = await db.Stall.findAll({
+        where: {
+          // user_id: request.cookies.user_id,
+          user_id: 1,
+        },
+        include: [
+          {
+            model: db.Town,
+
+          },
+        ],
+      });
+
+      response.json({ stallsByMerchant });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const listStallsWithAvgRating = async (request, response) => {
     try {
       const stallsWithAvgRating = await db.Review.findAll({
@@ -149,17 +170,59 @@ export default function initDataController(db) {
 
   // post a review
 
+  // const addReview = async (request, response) => {
+  //   console.log(request.body);
+  //   try {
+  //     const newReview = await db.Review.create({
+  //       // user_id: request.cookies.user_id,
+  //       user_id: 1,
+  //       stall_id: request.params.stall_id,
+  //       rating: Number(request.body.rating),
+  //       comments: request.body.comments,
+  //     });
+  //     console.log(newReview);
+  //     response.send({ newReview });
+  //   }
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const addReview = async (request, response) => {
     console.log(request.body);
     try {
       const newReview = await db.Review.create({
-        user_id: request.cookies.user_id,
-        stall_id: request.params.stall_id,
+        // user_id: request.cookies.user_id,
+        user_id: 1,
+        stall_id: Number(request.body.stall_id),
         rating: Number(request.body.rating),
         comments: request.body.comments,
+        created_at: new Date(),
+        updated_at: new Date(),
       });
       console.log(newReview);
       response.send({ newReview });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  const stallOnboard = async (request, response) => {
+    console.log(request.body);
+    try {
+      const newStall = await db.Stall.create({
+        name: request.body.name,
+        address: request.body.address,
+        // user_id: request.cookies.user_id,
+        user_id: 1,
+        town_id: 1,
+        category_id: 1,
+        created_at: new Date(),
+        updated_at: new Date(),
+      });
+      console.log(newStall);
+      response.send({ newStall });
     }
     catch (error) {
       console.log(error);
@@ -182,5 +245,7 @@ export default function initDataController(db) {
     listReviewsByStall,
     listStallsWithAvgRating,
     addReview,
+    stallOnboard,
+    listStallsByMerchant,
   };
 }
