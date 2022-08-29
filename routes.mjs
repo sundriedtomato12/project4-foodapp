@@ -20,6 +20,7 @@ export default function routes(app) {
   // app.post('/api/stall/:stall_id/new-review', DataController.addReview);
   app.post('/new-review', DataController.addReview);
   app.post('/new-stall', DataController.stallOnboard);
+  app.post('/new-menu-item', DataController.addMenuItem);
 
   app.get('*', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));

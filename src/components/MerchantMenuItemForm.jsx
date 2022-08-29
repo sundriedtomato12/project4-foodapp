@@ -2,59 +2,58 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function MerchantMenuItemForm({ stall_id }) {
-  const [rating, setRating] = useState('');
-  const [comments, setComments] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [description, setDescription] = useState('');
 
   // When user clicks Submit, store input in DB and state
-  const handleReviewSubmit = () => {
-    console.log(rating, comments, stall_id);
-    if (rating && comments) {
+  const handleMenuItemSubmit = () => {
+    if (itemName && description) {
       // backend post request
       axios
-        .post('/new-review', {
+        .post('/new-menu-item', {
+          name: itemName,
+          description,
           stall_id,
-          comments,
-          rating,
         })
         .then((response) => {
-          const { newReview } = response.data;
+          const { newItem } = response.data;
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      console.log('Review not created');
+      console.log('Item not created');
     }
     // reset personName
-    setRating('');
-    setComments('');
+    setItemName('');
+    setDescription('');
   };
 
   return (
     <>
-      <h3>Post A Review</h3>
-      <div className="review-form">
-        <div className="rating">
-          <label htmlFor="rating">Rating: </label>
+      <h3>Add a Menu Item</h3>
+      <div className="item-form">
+        <div className="name">
+          <label htmlFor="name">Name: </label>
           <input
             type="text"
-            id="rating"
-            value={rating}
-            onChange={(event) => setRating(event.target.value)}
+            id="name"
+            value={itemName}
+            onChange={(event) => setItemName(event.target.value)}
           />
         </div>
-        <div className="comments">
-          <label htmlFor="comments">Comments: </label>
+        <div className="description">
+          <label htmlFor="description">Description: </label>
           <input
             type="text"
-            id="comments"
-            value={comments}
-            onChange={(event) => setComments(event.target.value)}
+            id="description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </div>
 
-        <button type="submit" onClick={handleReviewSubmit}>
-          Submit Review
+        <button type="submit" onClick={handleMenuItemSubmit}>
+          Add Menu Item
         </button>
       </div>
     </>

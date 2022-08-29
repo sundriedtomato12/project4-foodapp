@@ -229,6 +229,25 @@ export default function initDataController(db) {
     }
   };
 
+  const addMenuItem = async (request, response) => {
+    console.log(request.body);
+    try {
+      const newItem = await db.Item.create({
+        // user_id: request.cookies.user_id,
+        name: request.body.name,
+        description: request.body.description,
+        stall_id: Number(request.body.stall_id),
+        created_at: new Date(),
+        updated_at: new Date(),
+      });
+      console.log(newItem);
+      response.send({ newItem });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
   // login, logout, signup
 
   // stall onboarding private form
@@ -247,5 +266,6 @@ export default function initDataController(db) {
     addReview,
     stallOnboard,
     listStallsByMerchant,
+    addMenuItem,
   };
 }
