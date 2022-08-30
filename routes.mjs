@@ -9,6 +9,7 @@ export default function routes(app) {
   app.get('/api/latest-reviews', DataController.listlatestReviews);
   app.get('/api/categories', DataController.listCategories);
   app.get('/api/town/:town_id', DataController.listStallsByTown);
+  app.get('/api/merchant-stalls', DataController.listStallsByMerchant);
   // this route doesn't work
   app.get('/api/town/:town_id/avg-rating', DataController.listStallsWithAvgRating);
   // test again when we setup the page with category dropdown
@@ -16,7 +17,10 @@ export default function routes(app) {
   app.get('/api/stall/:stall_id/items', DataController.listItemsByStall);
   app.get('/api/stall/:stall_id/reviews', DataController.listReviewsByStall);
   // post not tested
-  app.post('/api/stall/:stall_id/new-review', DataController.addReview);
+
+  app.post('/new-review', DataController.addReview);
+  app.post('/new-stall', DataController.stallOnboard);
+  app.post('/new-menu-item', DataController.addMenuItem);
   app.post('/api/login', DataController.login);
   app.post('/api/signup', DataController.signup);
   app.post('/api/logout', DataController.logout);

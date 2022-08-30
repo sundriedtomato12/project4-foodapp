@@ -6,8 +6,13 @@ import Cookies from "js-cookie";
 import MainPage from "./pages/MainPage.jsx";
 import TownPage from "./pages/TownPage.jsx";
 import StallPage from "./pages/StallPage.jsx";
+
+import MerchantLanding from "./pages/MerchantLanding.jsx";
+import MerchantStall from "./pages/MerchantStall.jsx";
+
 import SignupPage from "./pages/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+
 
 export default function App() {
   const navigate = useNavigate();
@@ -29,6 +34,8 @@ export default function App() {
 
   return (
     <Routes>
+      <Route path="/merchant-landing" element={<MerchantLanding />} />
+      <Route path="/merchant-stall/:stall_id" element={<MerchantStall />} />
       <Route path="/" element={<MainPage user={user} />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage setUser={setUser} />} />

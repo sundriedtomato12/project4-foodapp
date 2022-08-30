@@ -3,14 +3,12 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Row from '../components/Row.jsx';
 import Header from '../components/Header.jsx';
-import ReviewForm from '../components/ReviewForm.jsx';
+import MerchantMenuItemForm from '../components/MerchantMenuItemForm.jsx';
 
-
-export default function StallPage({ user }) {
-  let { stall_id } = useParams();
-
+export default function StallPage() {
+  const { stall_id } = useParams();
   const [menuItems, setMenuItems] = useState([]);
-  const [stallReviews, setStallReviews] = useState([]);
+  // const [stallReviews, setStallReviews] = useState([]);
   const [stallName, setStallName] = useState('');
 
   useEffect(() => {
@@ -20,20 +18,20 @@ export default function StallPage({ user }) {
       setStallName(response.data.itemsInStall[0].stall.name);
     });
   }, []);
-  useEffect(() => {
-    axios.get(`/api/stall/${stall_id}/reviews`).then((response) => {
-      setStallReviews(response.data.reviewsOnStall);
-      console.log('REVIEWS', response.data.reviewsOnStall);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`/api/stall/${stall_id}/reviews`).then((response) => {
+  //     setStallReviews(response.data.reviewsOnStall);
+  //     console.log('REVIEWS', response.data.reviewsOnStall);
+  //   });
+  // }, []);
 
   return (
     <>
-      <Header user={user} />
+      <Header />
       <h1>{stallName}</h1>
       <Row title="Menu" menuItems={menuItems} />
-      <Row title="Reviews" stallReviews={stallReviews} />
-      <ReviewForm stall_id={stall_id} />
+
+      <MerchantMenuItemForm stall_id={stall_id} />
     </>
   );
 }
