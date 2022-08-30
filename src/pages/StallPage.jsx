@@ -4,7 +4,7 @@ import axios from "axios";
 import Row from "../components/Row.jsx";
 import Header from "../components/Header.jsx";
 
-export default function StallPage() {
+export default function StallPage({ user }) {
   let { stall_id } = useParams();
   const [menuItems, setMenuItems] = useState([]);
   const [stallReviews, setStallReviews] = useState([]);
@@ -26,7 +26,7 @@ export default function StallPage() {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <h1>{stallName}</h1>
       <Row title="Menu" menuItems={menuItems} />
       <Row title="Reviews" stallReviews={stallReviews} />
