@@ -22,7 +22,10 @@ export default function App() {
   useEffect(() => {
     if (user.userId) {
       axios.get("/api/verify").then((response) => {
-        setUser({ userId: response.data.userId, loggedIn: true });
+        setUser({
+          userId: response.data.userId,
+          loggedIn: response.data.loggedIn,
+        });
       });
     }
   }, [navigate]);
