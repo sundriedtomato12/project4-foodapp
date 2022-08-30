@@ -1,14 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
-export default function Header() {
-  return (
-    <>
-      <Grid container spacing={2} className="header">
-        <Grid item xs={8}>
-          <h1 className="header">Where To Eat?</h1>
-        </Grid>
+export default function Header({ user }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios
+      .post("/api/logout")
+      .then(() => {
+        navigate("/");
+        window.location.reload(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  let buttons = "";
+  if (user.loggedIn == false) {
+    buttons = (
+      <>
         <Grid item xs={2}>
           <Button variant="contained" className="login" href="/login">
             Login
@@ -19,6 +31,32 @@ export default function Header() {
             Sign Up
           </Button>
         </Grid>
+      </>
+    );
+  } else if (user.loggedIn == true) {
+    buttons = (
+      <Grid item xs={2}>
+        <Button
+          variant="contained"
+          color="error"
+          className="logout"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </Grid>
+    );
+  }
+
+  return (
+    <>
+      <Grid container spacing={2} className="header">
+        <Grid item xs={8}>
+          <h1 className="header">
+            <a href="/">Where To Eat?</a>
+          </h1>
+        </Grid>
+        {buttons}
       </Grid>
     </>
   );

@@ -1,4 +1,22 @@
 import { Sequelize } from 'sequelize';
+import jsSHA from 'jssha';
+
+const { SALT } = process.env;
+
+const generateHash = (string) => {
+  // eslint-disable-next-line new-cap
+  const shaObj = new jsSHA('SHA-512', 'TEXT', { encoding: 'UTF8' });
+  const unhashedString = `${string}-${SALT}`;
+  shaObj.update(unhashedString);
+  const hashedString = shaObj.getHash('HEX');
+  return hashedString;
+};
+
+// compare value between two hashes, return true/false
+const verifyHash = (input, hashExpected) => {
+  const hashedInput = generateHash(input);
+  return hashedInput === hashExpected;
+};
 
 export default function initDataController(db) {
   const listTowns = async (request, response) => {
@@ -249,6 +267,78 @@ export default function initDataController(db) {
   };
 
   // login, logout, signup
+  const signup = async (request, response) => {
+    try {
+      const hashedPassword = generateHash(request.body.password);
+      const [user, created] = await db.User.findOrCreate({
+        where: {
+          email: request.body.email,
+        },
+        defaults: {
+          name: request.body.name,
+          password: hashedPassword,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      });
+      if (created) {
+        response.json({ newUser: true });
+      } else if (user) {
+        response.json({ existingUser: true });
+      }
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  const login = async (request, response) => {
+    try {
+      const userInfo = await db.User.findOne({
+        where: {
+          email: request.body.email,
+        },
+      });
+      if (userInfo === null) {
+        console.log('user info null');
+      } else if (userInfo != null) {
+        if (verifyHash(request.body.password, userInfo.password)) {
+          console.log('logged in!');
+          response.cookie('loggedInHash', generateHash(userInfo.id));
+          response.cookie('userId', userInfo.id);
+          response.json({ userInfo });
+        } else {
+          console.log(userInfo);
+        }
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  const verify = (request, response) => {
+    const { userId } = request.cookies;
+    const { loggedInHash } = request.cookies;
+
+    const hashedCookieString = generateHash(userId);
+
+    if (hashedCookieString === loggedInHash) {
+      response.json({ userId });
+      console.log(userId);
+    } else {
+      response.clearCookie('loggedInHash');
+      response.clearCookie('userId');
+      response.json({ redirect: '/' });
+    }
+  };
+
+  const logout = (request, response) => {
+    response.clearCookie('loggedInHash');
+    response.clearCookie('userId');
+    response.redirect('/');
+  };
 
   // stall onboarding private form
   // edit stall,item
@@ -267,5 +357,9 @@ export default function initDataController(db) {
     stallOnboard,
     listStallsByMerchant,
     addMenuItem,
+    signup,
+    login,
+    verify,
+    logout,
   };
 }

@@ -5,8 +5,10 @@ import Row from '../components/Row.jsx';
 import Header from '../components/Header.jsx';
 import ReviewForm from '../components/ReviewForm.jsx';
 
-export default function StallPage() {
-  const { stall_id } = useParams();
+
+export default function StallPage({ user }) {
+  let { stall_id } = useParams();
+
   const [menuItems, setMenuItems] = useState([]);
   const [stallReviews, setStallReviews] = useState([]);
   const [stallName, setStallName] = useState('');
@@ -27,7 +29,7 @@ export default function StallPage() {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <h1>{stallName}</h1>
       <Row title="Menu" menuItems={menuItems} />
       <Row title="Reviews" stallReviews={stallReviews} />
