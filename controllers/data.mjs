@@ -236,6 +236,7 @@ export default function initDataController(db) {
         user_id: 1,
         town_id: 1,
         category_id: 1,
+        photo: 'https://loremflickr.com/200/200/business?15378',
         created_at: new Date(),
         updated_at: new Date(),
       });

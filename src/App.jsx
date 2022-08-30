@@ -13,13 +13,12 @@ import MerchantStall from "./pages/MerchantStall.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 
-
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(() => {
     const userId = Cookies.get("userId");
     if (userId) {
-      return { userId: userId };
+      return { userId };
     }
     return { userId: "", loggedIn: false };
   });
@@ -34,8 +33,8 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/merchant-landing" element={<MerchantLanding />} />
-      <Route path="/merchant-stall/:stall_id" element={<MerchantStall />} />
+      <Route path="/merchant-landing" element={<MerchantLanding user={user} />} />
+      <Route path="/merchant-stall/:stall_id" element={<MerchantStall user={user} />} />
       <Route path="/" element={<MainPage user={user} />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage setUser={setUser} />} />

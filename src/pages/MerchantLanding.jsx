@@ -6,7 +6,7 @@ import Header from '../components/Header.jsx';
 import Row from '../components/Row.jsx';
 import MerchantStallForm from '../components/MerchantStallForm.jsx';
 
-export default function MerchantLanding() {
+export default function MerchantLanding({ user }) {
   // const { town_id } = useParams();
   const [stallsInTown, setStallsInTown] = useState([]);
   const [townName, setTownName] = useState('');
@@ -21,7 +21,7 @@ export default function MerchantLanding() {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <Row title="Stalls" stallsInTown={stallsInTown} />
       <MerchantStallForm />
     </>
