@@ -1,10 +1,16 @@
-.town img {
-  width: 200px;
-  height: 200px;
+img {
+  height: 90%;
+  width: 90%;
 }
 
 .stall:hover,
 .town:hover,
 .latest-review:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 4px grey;
+}
+
+h1.header:hover {
+  text-shadow: 1px 1px 4px grey;
   cursor: pointer;
 }

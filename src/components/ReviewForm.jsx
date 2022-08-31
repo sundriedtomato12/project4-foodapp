@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-export default function ReviewForm({ stall_id }) {
-  const [rating, setRating] = useState('');
-  const [comments, setComments] = useState('');
+export default function ReviewForm({ stall_id, user }) {
+  const [rating, setRating] = useState("");
+  const [comments, setComments] = useState("");
+  const { userId } = user;
 
   // When user clicks Submit, store input in DB and state
   const handleReviewSubmit = () => {
@@ -11,7 +12,8 @@ export default function ReviewForm({ stall_id }) {
     if (rating && comments) {
       // backend post request
       axios
-        .post('/new-review', {
+        .post("/new-review", {
+          userId,
           stall_id,
           comments,
           rating,
@@ -23,11 +25,11 @@ export default function ReviewForm({ stall_id }) {
           console.log(error);
         });
     } else {
-      console.log('Review not created');
+      console.log("Review not created");
     }
     // reset personName
-    setRating('');
-    setComments('');
+    setRating("");
+    setComments("");
   };
 
   return (

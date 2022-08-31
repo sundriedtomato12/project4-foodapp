@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import jsSHA from 'jssha';
+import Cookies from 'js-cookie';
 
 const { SALT } = process.env;
 
@@ -207,19 +208,18 @@ export default function initDataController(db) {
   // };
 
   const addReview = async (request, response) => {
-    console.log(request.body);
     try {
       const newReview = await db.Review.create({
         // user_id: request.cookies.user_id,
-        user_id: 1,
+        user_id: request.body.userId,
         stall_id: Number(request.body.stall_id),
         rating: Number(request.body.rating),
         comments: request.body.comments,
         created_at: new Date(),
         updated_at: new Date(),
       });
-      console.log(newReview);
-      response.send({ newReview });
+      response.redirect(`/stall/${request.body.stall_id}`);
+      window.location.reload();
     }
     catch (error) {
       console.log(error);
