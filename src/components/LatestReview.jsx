@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LatestReview({ review }) {
   const stallLink = `/stall/${review.stall.id}`;
+  const navigate = useNavigate();
   return (
     <Grid item xs={3}>
-      <Paper className="Review" key={review.id} component={Link} to={stallLink}>
+      <Paper
+        className="latest-review"
+        key={review.id}
+        onClick={() => {
+          navigate(stallLink);
+        }}
+      >
         <p>
           {review.stall.name}
           <br />

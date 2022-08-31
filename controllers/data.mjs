@@ -326,12 +326,12 @@ export default function initDataController(db) {
     const hashedCookieString = generateHash(userId);
 
     if (hashedCookieString === loggedInHash) {
-      response.json({ userId });
+      response.json({ userId, loggedIn: true });
       console.log(userId);
     } else {
       response.clearCookie('loggedInHash');
       response.clearCookie('userId');
-      response.json({ redirect: '/' });
+      response.json({ redirect: '/', userId: '', loggedIn: false });
     }
   };
 
