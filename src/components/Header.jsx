@@ -34,16 +34,28 @@ export default function Header({ user }) {
     );
   } else if (user.loggedIn == true) {
     buttons = (
-      <Grid item xs={2}>
-        <Button
-          variant="contained"
-          color="error"
-          className="logout"
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
-      </Grid>
+      <>
+        <Grid item xs={2}>
+          <Button
+            variant="contained"
+            color="primary"
+            className="merchant-landing"
+            href="/merchant-landing"
+          >
+            Create New Stall
+          </Button>
+        </Grid>
+        <Grid item xs={2}>
+          <Button
+            variant="contained"
+            color="error"
+            className="logout"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Grid>
+      </>
     );
   }
 
