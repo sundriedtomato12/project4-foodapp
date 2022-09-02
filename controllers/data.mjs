@@ -327,7 +327,6 @@ export default function initDataController(db) {
 
     if (hashedCookieString === loggedInHash) {
       response.json({ userId, loggedIn: true });
-      console.log(userId);
     } else {
       response.clearCookie('loggedInHash');
       response.clearCookie('userId');
