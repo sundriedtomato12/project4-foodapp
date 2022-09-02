@@ -75,14 +75,17 @@ export default function Header({ user }) {
     <>
       <Grid container spacing={2} className="header">
         <Grid item xs>
-          <h1
-            className="header"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Where To Eat?
-          </h1>
+          <div id="header-and-logo">
+            <img src="./foodtruck.png" id="header-img" />
+            <h1
+              className="header"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Where To Eat?
+            </h1>
+          </div>
         </Grid>
         {buttons}
       </Grid>

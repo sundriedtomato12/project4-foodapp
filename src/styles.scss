@@ -3,6 +3,18 @@ img {
   width: 90%;
 }
 
+img#header-img {
+  margin: 10px;
+  height: 60px;
+  width: 60px;
+}
+
+div#header-and-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 h1.header,
 h1.stall-name,
 h1.town-name {
