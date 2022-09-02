@@ -76,7 +76,10 @@ export default function Header({ user }) {
       <Grid container spacing={2} className="header">
         <Grid item xs>
           <div id="header-and-logo">
-            <img src="./foodtruck.png" id="header-img" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2569/2569283.png"
+              id="header-img"
+            />
             <h1
               className="header"
               onClick={() => {

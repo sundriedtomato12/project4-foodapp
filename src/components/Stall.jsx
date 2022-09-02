@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import DiningIcon from "@mui/icons-material/Dining";
+import PlaceIcon from "@mui/icons-material/Place";
 
 export default function Stall({ stall }) {
   const stallLink = `/stall/${stall.id}`;
@@ -13,8 +15,15 @@ export default function Stall({ stall }) {
           navigate(stallLink);
         }}
       >
-        <h4>{stall.name}</h4>
-        <p>{stall.address}</p>
+        <h4>
+          <DiningIcon />
+          {stall.name}
+        </h4>
+
+        <p>
+          <PlaceIcon />
+          {stall.address}
+        </p>
       </Paper>
     </Grid>
   );
