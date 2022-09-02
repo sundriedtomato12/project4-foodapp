@@ -86,10 +86,7 @@ export default function Row({ title, stallsInTown, menuItems, stallReviews }) {
     <>
       <div className={titleClassName}>
         <h1 className={titleClassName}>{title}</h1>
-        <div
-          id={titleClassName}
-          style={{ overflowX: "auto", overflowY: "auto" }}
-        >
+        <div id={titleClassName} style={{ overflowX: "auto" }}>
           {rowComponents}
         </div>
       </div>
