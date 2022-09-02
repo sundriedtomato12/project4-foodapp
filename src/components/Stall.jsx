@@ -6,7 +6,7 @@ export default function Stall({ stall }) {
   const stallLink = `/stall/${stall.id}`;
   const navigate = useNavigate();
   return (
-    <Grid item xs={3}>
+    <Grid item>
       <Paper
         className="stall"
         onClick={() => {

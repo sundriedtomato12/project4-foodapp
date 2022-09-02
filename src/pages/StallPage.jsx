@@ -35,7 +35,7 @@ export default function StallPage({ user }) {
   return (
     <>
       <Header user={user} />
-      <h1>{stallName}</h1>
+      <h1 className="stall-name">{stallName}</h1>
       <Row title="Menu" menuItems={menuItems} />
       <Row title="Reviews" stallReviews={stallReviews} />
       {reviewForm}

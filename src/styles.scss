@@ -3,14 +3,44 @@ img {
   width: 90%;
 }
 
+h1.header,
+h1.stall-name,
+h1.town-name {
+  margin: 10px;
+}
+
+.login,
+.logout,
+.signup {
+  margin: 15px;
+}
+
 .stall:hover,
 .town:hover,
 .latest-review:hover {
   cursor: pointer;
-  box-shadow: 1px 1px 4px grey;
+  box-shadow: 2px 2px 4px grey;
 }
 
 h1.header:hover {
   text-shadow: 1px 1px 4px grey;
   cursor: pointer;
+}
+
+div.towns,
+div.latest-reviews,
+div.stalls,
+div.reviews,
+div.menu {
+  margin: 10px;
+}
+
+div#towns,
+div#latest-reviews {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 35vh;
+  overflow: scroll;
+  white-space: nowrap;
 }

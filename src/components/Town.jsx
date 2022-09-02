@@ -7,7 +7,7 @@ export default function Town({ town }) {
   const townLink = `/town/${town.id}`;
   const navigate = useNavigate();
   return (
-    <Grid item xs={2}>
+    <Grid item>
       <Box
         className="town"
         key={town.id}
