@@ -20,7 +20,7 @@ export default function TownPage({ user }) {
   return (
     <>
       <Header user={user} />
-      <h1>{townName}</h1>
+      <h1 className="town-name">{townName}</h1>
       <Row title="Stalls" stallsInTown={stallsInTown} />
     </>
   );

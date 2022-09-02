@@ -6,7 +6,7 @@ export default function LatestReview({ review }) {
   const stallLink = `/stall/${review.stall.id}`;
   const navigate = useNavigate();
   return (
-    <Grid item xs={3}>
+    <Grid item>
       <Paper
         className="latest-review"
         key={review.id}
