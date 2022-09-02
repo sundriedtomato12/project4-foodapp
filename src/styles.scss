@@ -9,9 +9,10 @@ h1.town-name {
   margin: 10px;
 }
 
-.login,
-.logout,
-.signup {
+div.buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
   margin: 15px;
 }
 
@@ -58,8 +59,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  // -webkit-filter: hue-rotate(-90deg);
 }
 
 hr {
@@ -90,4 +89,20 @@ p {
   color: $black;
   margin: 0 0 0.5em 0;
   line-height: 1.1;
+}
+
+#signup-button {
+  white-space: nowrap;
+  min-width: auto;
+  margin-left: 15px;
+}
+
+#merchant-landing-button {
+  white-space: nowrap;
+  min-width: auto;
+  margin-right: 15px;
+}
+
+div.buttons {
+  margin-top: 30px;
 }

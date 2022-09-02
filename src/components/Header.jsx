@@ -19,50 +19,62 @@ export default function Header({ user }) {
   let buttons = "";
   if (user.loggedIn == false) {
     buttons = (
-      <>
-        <Grid item xs={2}>
-          <Button variant="contained" className="login" href="/login">
+      <div className="buttons">
+        <Grid item xs>
+          <Button
+            variant="contained"
+            className="login"
+            id="login-button"
+            href="/login"
+          >
             Login
           </Button>
         </Grid>
-        <Grid item xs={2}>
-          <Button variant="contained" className="signup" href="/signup">
+        <Grid item xs>
+          <Button
+            variant="contained"
+            className="signup"
+            id="signup-button"
+            href="/signup"
+          >
             Sign Up
           </Button>
         </Grid>
-      </>
+      </div>
     );
   } else if (user.loggedIn == true) {
     buttons = (
-      <>
-        <Grid item xs={2}>
+      <div className="buttons">
+        <Grid item xs>
           <Button
             variant="contained"
             color="primary"
             className="merchant-landing"
+            id="merchant-landing-button"
             href="/merchant-landing"
           >
             Create New Stall
           </Button>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs>
           <Button
             variant="contained"
             color="error"
             className="logout"
+            id="logout-button"
             onClick={handleLogout}
           >
             Logout
           </Button>
         </Grid>
-      </>
+      </div>
     );
   }
 
   return (
     <>
       <Grid container spacing={2} className="header">
-        <Grid item xs={8}>
+        <Grid item xs>
           <h1
             className="header"
             onClick={() => {
