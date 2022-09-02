@@ -15,7 +15,7 @@ export default function Town({ town }) {
           navigate(townLink);
         }}
       >
-        <p>{town.town_name}</p>
+        <h3>{town.town_name}</h3>
         <img src={town.photo}></img>
       </Box>
     </Grid>

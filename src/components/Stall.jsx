@@ -13,7 +13,7 @@ export default function Stall({ stall }) {
           navigate(stallLink);
         }}
       >
-        <p>{stall.name}</p>
+        <h4>{stall.name}</h4>
         <p>{stall.address}</p>
       </Paper>
     </Grid>

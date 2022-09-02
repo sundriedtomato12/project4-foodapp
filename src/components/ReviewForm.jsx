@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Rating } from "@mui/material";
 
 export default function ReviewForm({ stall_id, user }) {
   const [rating, setRating] = useState("");
@@ -37,12 +38,12 @@ export default function ReviewForm({ stall_id, user }) {
       <h3>Post A Review</h3>
       <div className="review-form">
         <div className="rating">
-          <label htmlFor="rating">Rating: </label>
-          <input
-            type="text"
-            id="rating"
+          <Rating
+            name="simple-controlled"
             value={rating}
-            onChange={(event) => setRating(event.target.value)}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
           />
         </div>
         <div className="comments">
