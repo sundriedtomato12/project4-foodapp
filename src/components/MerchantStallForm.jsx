@@ -6,6 +6,8 @@ export default function MerchantStallForm({ stall_id }) {
   const [address, setAddress] = useState('');
   const [towns, setTowns] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [town, setTown] = useState('1');
+  const [category, setCategory] = useState('1');
 
   useEffect(() => {
     axios.get('/api/towns').then((response) => {
@@ -29,6 +31,8 @@ export default function MerchantStallForm({ stall_id }) {
         .post('/new-stall', {
           name: stallName,
           address,
+          town,
+          category,
         })
         .then((response) => {
           const { newStall } = response.data;
@@ -42,6 +46,8 @@ export default function MerchantStallForm({ stall_id }) {
     // reset personName
     setStallName('');
     setAddress('');
+    setTown('1');
+    setCategory('1');
   };
 
   return (
@@ -68,7 +74,7 @@ export default function MerchantStallForm({ stall_id }) {
         </div>
         <div className="town">
           <label htmlFor="town">Town: </label>
-          <select name="town">
+          <select name="town" onChange={(e) => setTown(e.target.value)}>
             {towns.map((town) => (
               <option value={town.id}>
                 {town.town_name}
@@ -78,7 +84,7 @@ export default function MerchantStallForm({ stall_id }) {
         </div>
         <div className="category">
           <label htmlFor="category">Category: </label>
-          <select name="category">
+          <select name="category" onChange={(e) => setCategory(e.target.value)}>
             {categories.map((category) => (
               <option value={category.id}>
                 {category.category_name}
