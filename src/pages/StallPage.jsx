@@ -14,8 +14,10 @@ export default function StallPage({ user }) {
 
   useEffect(() => {
     axios.get(`/api/stall/${stall_id}/items`).then((response) => {
-      setMenuItems(response.data.itemsInStall);
-      setStallName(response.data.itemsInStall[0].stall.name);
+      if (response.data.itemsInStall.length > 0) {
+        setMenuItems(response.data.itemsInStall);
+        setStallName(response.data.itemsInStall[0].stall.name);
+      }
     });
   }, []);
   useEffect(() => {
