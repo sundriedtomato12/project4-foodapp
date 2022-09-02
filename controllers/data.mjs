@@ -88,8 +88,8 @@ export default function initDataController(db) {
     try {
       const stallsByMerchant = await db.Stall.findAll({
         where: {
-          // user_id: request.cookies.user_id,
-          user_id: 1,
+          user_id: request.cookies.userId,
+          // user_id: 1,
         },
         include: [
           {
@@ -232,10 +232,10 @@ export default function initDataController(db) {
       const newStall = await db.Stall.create({
         name: request.body.name,
         address: request.body.address,
-        // user_id: request.cookies.user_id,
-        user_id: 1,
-        town_id: 1,
-        category_id: 1,
+        user_id: request.cookies.userId,
+        // user_id: 1,
+        town_id: request.body.town,
+        category_id: request.body.category,
         photo: 'https://loremflickr.com/200/200/business?15378',
         created_at: new Date(),
         updated_at: new Date(),
